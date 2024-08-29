@@ -5,22 +5,23 @@
   <title>投票</title>
 </head>
 <body>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfT-epliePVm9_u-EZvcZq2r2117JwJ0ZXiQTxj6BRKLVDF4A/viewform?usp=sf_link" width="100%" height="500" frameborder="0"></iframe>
+  <!-- Googleフォームを埋め込む -->
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfT-epliePVm9_u-EZvcZq2r2117JwJ0ZXiQTxj6BRKLVDF4A/viewform?usp=sf_link" width="100%" height="600" frameborder="0"></iframe>
 
-  <div id="thanksMessage" style="display: none;">
+  <!-- 投票完了後に表示されるメッセージ -->
+  <div id="thanksMessage" style="display: none; text-align: center; margin-top: 20px;">
     <p>投票が完了しました。ありがとうございます。<br>５秒後に投票画面に戻ります。</p>
   </div>
 
   <script>
-    // Googleフォームが送信された後の処理
+    // iframeのURLに基づいてリダイレクトするための方法が制約されているため
+    // 代わりにユーザーに手動で戻ってもらうようにする
     document.querySelector("iframe").onload = function() {
-      if (this.contentWindow.location.href.indexOf('formResponse') !== -1) {
-        document.querySelector("iframe").style.display = "none";
-        document.getElementById("thanksMessage").style.display = "block";
-        setTimeout(function() {
-          window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfT-epliePVm9_u-EZvcZq2r2117JwJ0ZXiQTxj6BRKLVDF4A/viewform?usp=sf_link";
-        }, 5000);
-      }
+      document.getElementById("thanksMessage").style.display = "block"; // メッセージを表示する
+      // 5秒後にリダイレクト
+      setTimeout(function() {
+        window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfT-epliePVm9_u-EZvcZq2r2117JwJ0ZXiQTxj6BRKLVDF4A/viewform?usp=sf_link";
+      }, 5000);
     };
   </script>
 </body>
